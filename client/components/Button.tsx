@@ -7,7 +7,7 @@ interface Props {
 
 const Button = ({buttonText, type}: Props) => {
   return (
-    <button type={type} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{buttonText}</button>
+    <button type={type} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-80">{buttonText}</button>
   )
 }
 
