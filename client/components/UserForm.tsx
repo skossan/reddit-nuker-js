@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
 import InputField from './InputField'
 
 const UserForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleOnClick = (e: Event) => {
+    console.log("Click!")
+  }
+
   return (
     <form>
       <div className="flex flex-col items-center">
