@@ -14,29 +14,17 @@ So here is a:battery:battery packed starter to save some time.
 
 This is a monorepo containing Next.js frontend and Express for backend. Frontend lies inside `client` directory and Backend is inside `server` directory.
 
-### 1. Clone the repo
-
-```sh
-git clone git@github.com:bhavesh-chaudhari/ts-nextjs-express-starter.git
-```
-
-### 2. Install frontend and backend dependencies
+### 1. Install frontend and backend dependencies
 
 ```sh
 npm install # for frontend cd to client for backend cd to server
 ```
-### 3. Run the development server
+### 2. Run the development server
 
 ```sh
 npm run dev # in both client and server directory
 ```
 
-### 4. Environment Variables
+### 3. Environment Variables
 - Put .env file inside `server/src/config` for backend env variables or simply rename the existing `.env.example` to `.env`. 
 - Use .env.local for env variables in nextjs.[`Further reading`](https://nextjs.org/docs/basic-features/environment-variables).
-
-### 5. More to come...
-
-## To do 
-- Add Husky, Prettier, Eslint setup
-- more...
