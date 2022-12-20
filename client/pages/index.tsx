@@ -7,16 +7,6 @@ const Home: NextPage = () => {
   return (
     <div>
       <UserForm />
-      <RedditComment
-        commentBody="This is the comment body"
-        commentID="3euyg4d"
-        commentLink="/84fhfh223"
-      />
-      <RedditComment
-        commentBody="This is the comment body"
-        commentID="3euyg4d"
-        commentLink="/84fhfh223"
-      />
     </div>
   );
 };
