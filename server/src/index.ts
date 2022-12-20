@@ -20,12 +20,6 @@ app.use(
   })
 );
 
-// interface Comment {
-//   commentBody: string;
-//   commentID: string;
-//   commentLink: string;
-// }
-
 //
 // Global Variables
 //
