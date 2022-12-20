@@ -1,9 +1,11 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config({
+  path: "src/.env",
+});
+import express from "express";
 import path from "path";
 import cors from "cors";
 import { Request, Response, Application } from "express";
-
 import Snoowrap from "snoowrap";
 
 const app: Application = express();
@@ -37,6 +39,17 @@ const sampleData = [
   },
 ];
 
+const r = new Snoowrap({
+  userAgent: "Reddit-Nuker-JS-1.0",
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.SECRET,
+  refreshToken: process.env.REFRESH_TOKEN,
+});
+
+//
+// ENDPOINTS
+//
+
 app.get("/", (req: Request, res: Response) => {
   res.send("It works");
 });
@@ -45,8 +58,15 @@ app.post("/getComments", (req: Request, res: Response) => {
   const data = req.body;
   const username = data.userData.username[0];
   const password = data.userData.password[0];
-  if (username === "test" && password === "test") {
-    res.send(sampleData);
+  if (username && password) {
+    r.getUser(username)
+      .getComments()
+      .then((response) => {
+        res.send(response);
+      })
+      .catch(() => {
+        res.status(400).send("Could not find Reddit user");
+      });
   } else {
     res.status(400).send("Incorrect Credentials");
   }

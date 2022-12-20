@@ -12,7 +12,7 @@ const RedditComment = ({ commentBody, commentID, commentLink }: Props) => {
       <div className="flex flex-col items-center">
         <p>Comment Body: {commentBody}</p>
         <p>Comment ID: {commentID}</p>
-        <p>Comment Link: {commentLink}</p>
+        <a href={commentLink}>Comment Link: CLICK HERE</a>
       </div>
       <br />
     </>

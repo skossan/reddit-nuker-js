@@ -86,10 +86,10 @@ const UserForm = () => {
           {comments.map((comment) => {
             return (
               <RedditComment
-                key={comment.commentID}
-                commentBody={comment.commentBody}
-                commentID={comment.commentID}
-                commentLink={comment.commentLink}
+                key={comment.id}
+                commentBody={comment.body}
+                commentID={comment.id}
+                commentLink={comment.link_permalink}
               />
             );
           })}
