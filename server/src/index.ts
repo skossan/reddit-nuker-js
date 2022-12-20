@@ -16,8 +16,27 @@ app.use(
   })
 );
 
+// interface Comment {
+//   commentBody: string;
+//   commentID: string;
+//   commentLink: string;
+// }
+
+const data = [
+  {
+    commentBody: "This is comment 1",
+    commentID: "84739fjfjs",
+    commentLink: "/987s9v8c",
+  },
+  {
+    commentBody: "This is comment 2",
+    commentID: "387ddmm",
+    commentLink: "/12vnjfdh4",
+  },
+];
+
 app.get("/", (req: Request, res: Response) => {
-  res.send("it works");
+  res.send(data);
 });
 
 const PORT = process.env.PORT || 5000;
