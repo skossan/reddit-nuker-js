@@ -28,10 +28,17 @@ const UserForm = () => {
         userData,
       })
       .then((res) => {
-        setComments(res.data);
+        console.log("Res");
+        console.log(res.data);
+        if (res.data.length === 0) {
+          return;
+        } else {
+          setComments(res.data);
+        }
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log("Err");
+        console.log(error.response);
       });
   };
 
@@ -41,7 +48,17 @@ const UserForm = () => {
 
   const deleteAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log("Delete all comments");
+    axios
+      .post("http://localhost:5000/deleteAllComments", {
+        userData,
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("Delete all comments");
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   return (

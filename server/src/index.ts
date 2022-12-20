@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config({
   path: "src/.env",
 });
-import express from "express";
+import express, { response } from "express";
 import path from "path";
 import cors from "cors";
 import { Request, Response, Application } from "express";
@@ -25,6 +25,11 @@ app.use(
 //   commentID: string;
 //   commentLink: string;
 // }
+
+//
+// Global Variables
+//
+let comments: any = [];
 
 const sampleData = [
   {
@@ -62,7 +67,13 @@ app.post("/getComments", (req: Request, res: Response) => {
     r.getUser(username)
       .getComments()
       .then((response) => {
-        res.send(response);
+        if (response.length === 0) {
+          return res.send("Could not find any comments...");
+        } else {
+          res.send(response);
+          comments = response;
+          console.log(comments[0].id);
+        }
       })
       .catch(() => {
         res.status(400).send("Could not find Reddit user");
@@ -70,6 +81,22 @@ app.post("/getComments", (req: Request, res: Response) => {
   } else {
     res.status(400).send("Incorrect Credentials");
   }
+});
+
+app.post("/deleteAllComments", (req: Request, res: Response) => {
+  const data = req.body;
+  const username = data.userData.username[0];
+  const password = data.userData.password[0];
+  if (username && password) {
+    const tempComment: any = [];
+    comments.forEach((comment: any) => {
+      tempComment.push(comment.id);
+    });
+    tempComment.forEach((commentID: string) => {
+      r.getComment(commentID).delete();
+    });
+  }
+  res.send("All comments removed");
 });
 
 const PORT = process.env.PORT || 5000;
