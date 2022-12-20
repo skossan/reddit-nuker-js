@@ -28,18 +28,13 @@ const UserForm = () => {
         userData,
       })
       .then((res) => {
-        console.log("Res");
-        console.log(res.data);
         if (res.data.length === 0) {
           return;
         } else {
           setComments(res.data);
         }
       })
-      .catch((error) => {
-        console.log("Err");
-        console.log(error.response);
-      });
+      .catch((error) => {});
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,12 +48,12 @@ const UserForm = () => {
         userData,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log("Delete all comments");
+        setUserData({
+          username: "",
+          password: "",
+        });
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
+      .catch((error) => {});
   };
 
   return (

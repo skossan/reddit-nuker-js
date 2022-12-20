@@ -68,11 +68,10 @@ app.post("/getComments", (req: Request, res: Response) => {
       .getComments()
       .then((response) => {
         if (response.length === 0) {
-          return res.send("Could not find any comments...");
+          return res.status(400).send("Could not find any comments...");
         } else {
           res.send(response);
           comments = response;
-          console.log(comments[0].id);
         }
       })
       .catch(() => {
@@ -89,14 +88,23 @@ app.post("/deleteAllComments", (req: Request, res: Response) => {
   const password = data.userData.password[0];
   if (username && password) {
     const tempComment: any = [];
+
     comments.forEach((comment: any) => {
       tempComment.push(comment.id);
     });
+
+    tempComment.forEach((commentID: string) => {
+      r.getComment(commentID).edit("Lorem Ipsum...");
+    });
+
     tempComment.forEach((commentID: string) => {
       r.getComment(commentID).delete();
     });
+
+    res.status(200).send("All comments removed");
+  } else {
+    res.status(400).send("Could not edit & delete comments");
   }
-  res.send("All comments removed");
 });
 
 const PORT = process.env.PORT || 5000;
