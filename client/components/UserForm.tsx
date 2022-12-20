@@ -24,6 +24,10 @@ const UserForm = () => {
     setUserData({...userData,[event.target.name]:[event.target.value]});
   }
 
+  const deleteAllComments = () => {
+    console.log("Delete all comments")
+  }
+
   return (
     <form>
       <div className="flex flex-col items-center">
@@ -31,6 +35,7 @@ const UserForm = () => {
         <InputField labelText='Password:' value={userData.password} type='password' name='password' placeholderText='password' onChange={handleOnChange} required/>
         <br />
         <Button buttonText='Get Comments' type='submit' onClick={handleOnClick}/>
+        <Button buttonText='Delete All Comments' onClick={deleteAllComments}/>
         <br />
       </div>
     </form>
