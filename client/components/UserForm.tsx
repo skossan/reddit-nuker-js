@@ -1,28 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import InputField from "./InputField";
+import axios from "axios";
+import RedditComment from "./RedditComment";
 
 interface UserData {
   username: string;
   password: string;
 }
 
+// {comments.map((comment) => {
+//   <RedditComment
+//     key={comment.commentID}
+//     commentBody={comment.commentBody}
+//     commentID={comment.commentID}
+//     commentLink={comment.commentLink}
+//   />;
+// })}
+
+// interface Comment {
+//   data: [];
+// }
+
 const UserForm = () => {
   const [userData, setUserData] = useState<UserData>({
     username: "",
     password: "",
   });
+  const [comments, setComments] = useState([]);
 
-  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const getAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(userData);
+    axios
+      .post("http://localhost:5000/getComments", {
+        userData,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({ ...userData, [event.target.name]: [event.target.value] });
   };
 
-  const deleteAllComments = () => {
+  const deleteAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     console.log("Delete all comments");
   };
 
@@ -52,7 +78,7 @@ const UserForm = () => {
           <Button
             buttonText="Get Comments"
             type="submit"
-            onClick={handleOnClick}
+            onClick={getAllComments}
           />
           <Button
             buttonText="Delete All Comments"
@@ -60,6 +86,8 @@ const UserForm = () => {
           />
         </div>
         <br />
+        <p>List of comments:</p>
+        <div>coments...</div>
       </div>
     </form>
   );
