@@ -2,8 +2,7 @@ import dotenv from "dotenv";
 dotenv.config({
   path: "src/.env",
 });
-import express, { response } from "express";
-import path from "path";
+import express from "express";
 import cors from "cors";
 import { Request, Response, Application } from "express";
 import Snoowrap from "snoowrap";
