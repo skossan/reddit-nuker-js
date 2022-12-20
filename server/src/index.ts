@@ -11,8 +11,6 @@ import Snoowrap from "snoowrap";
 const app: Application = express();
 app.use(express.json());
 
-dotenv.config({ path: path.resolve(__dirname, "./config/.env") });
-
 app.use(
   cors({
     origin: "http://localhost:3000",
