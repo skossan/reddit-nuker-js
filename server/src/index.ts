@@ -22,7 +22,7 @@ app.use(
 //   commentLink: string;
 // }
 
-const data = [
+const sampleData = [
   {
     commentBody: "This is comment 1",
     commentID: "84739fjfjs",
@@ -36,7 +36,18 @@ const data = [
 ];
 
 app.get("/", (req: Request, res: Response) => {
-  res.send(data);
+  res.send("It works");
+});
+
+app.post("/getComments", (req: Request, res: Response) => {
+  const data = req.body;
+  const username = data.userData.username[0];
+  const password = data.userData.password[0];
+  if (username === "test" && password === "test") {
+    res.send(sampleData);
+  } else {
+    res.status(400).send("Incorrect Credentials");
+  }
 });
 
 const PORT = process.env.PORT || 5000;
