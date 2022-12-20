@@ -31,19 +31,6 @@ app.use(
 //
 let comments: any = [];
 
-const sampleData = [
-  {
-    commentBody: "This is comment 1",
-    commentID: "84739fjfjs",
-    commentLink: "/987s9v8c",
-  },
-  {
-    commentBody: "This is comment 2",
-    commentID: "387ddmm",
-    commentLink: "/12vnjfdh4",
-  },
-];
-
 const r = new Snoowrap({
   userAgent: "Reddit-Nuker-JS-1.0",
   clientId: process.env.CLIENT_ID,
