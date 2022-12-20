@@ -9,10 +9,6 @@ interface UserData {
   password: string;
 }
 
-// interface Comment {
-//   data: [];
-// }
-
 const UserForm = () => {
   const [userData, setUserData] = useState<UserData>({
     username: "",
