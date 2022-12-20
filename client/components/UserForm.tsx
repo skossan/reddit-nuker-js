@@ -9,15 +9,6 @@ interface UserData {
   password: string;
 }
 
-// {comments.map((comment) => {
-//   <RedditComment
-//     key={comment.commentID}
-//     commentBody={comment.commentBody}
-//     commentID={comment.commentID}
-//     commentLink={comment.commentLink}
-//   />;
-// })}
-
 // interface Comment {
 //   data: [];
 // }
@@ -37,7 +28,7 @@ const UserForm = () => {
         userData,
       })
       .then((res) => {
-        console.log(res.data);
+        setComments(res.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -87,8 +78,22 @@ const UserForm = () => {
           />
         </div>
         <br />
-        <p>List of comments:</p>
-        <div>coments...</div>
+        <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          List of comments:
+        </p>
+        <br />
+        <div>
+          {comments.map((comment) => {
+            return (
+              <RedditComment
+                key={comment.commentID}
+                commentBody={comment.commentBody}
+                commentID={comment.commentID}
+                commentLink={comment.commentLink}
+              />
+            );
+          })}
+        </div>
       </div>
     </form>
   );
