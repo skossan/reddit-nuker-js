@@ -6,7 +6,7 @@ const UserForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleOnClick = (e: Event) => {
+  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log("Click!")
   }
 
@@ -16,7 +16,7 @@ const UserForm = () => {
         <InputField labelText='Username:' type='text' name='username' placeholderText='username' required/>
         <InputField labelText='Password:' type='password' name='password' placeholderText='password' required/>
         <br />
-        <Button buttonText='Get Comments' type='button'/>
+        <Button buttonText='Get Comments' type='button' onClick={handleOnClick}/>
       </div>
     </form>
   )
