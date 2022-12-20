@@ -6,13 +6,17 @@ interface Props {
   placeholderText: string;
   name: string;
   required?: boolean;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField = ({labelText, name, placeholderText, required, type}: Props) => {
+const InputField = ({labelText, value, onChange, name, placeholderText, required, type}: Props) => {
   return (
     <>
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{labelText}</label>
       <input
+        onChange={onChange}
+        value={value}
         type={type || "text"}
         placeholder={placeholderText}
         name={name}

@@ -2,21 +2,34 @@ import React, { useState } from 'react'
 import Button from './Button'
 import InputField from './InputField'
 
+interface UserData {
+  username: string
+  password: string
+}
+
 const UserForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [userData, setUserData] = useState<UserData>({
+    username: "",
+    password: ""
+  });
 
   const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("Click!")
+    event.preventDefault();
+    console.log(userData)
+  }
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData({...userData,[event.target.name]:[event.target.value]});
   }
 
   return (
     <form>
       <div className="flex flex-col items-center">
-        <InputField labelText='Username:' type='text' name='username' placeholderText='username' required/>
-        <InputField labelText='Password:' type='password' name='password' placeholderText='password' required/>
+        <InputField labelText='Username:' value={userData.username} type='text' name='username' placeholderText='username' onChange={handleOnChange} required/>
+        <InputField labelText='Password:' value={userData.password} type='password' name='password' placeholderText='password' onChange={handleOnChange} required/>
         <br />
-        <Button buttonText='Get Comments' type='button' onClick={handleOnClick}/>
+        <Button buttonText='Get Comments' type='submit' onClick={handleOnClick}/>
       </div>
     </form>
   )
