@@ -31,6 +31,7 @@ const UserForm = () => {
 
   const getAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
     axios
       .post("http://localhost:5000/getComments", {
         userData,
