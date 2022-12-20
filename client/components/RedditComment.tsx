@@ -8,11 +8,14 @@ interface Props {
 
 const RedditComment = ({commentBody, commentID, commentLink}:Props) => {
   return (
-    <div>
-      <p>{commentBody}</p>
-      <p>{commentID}</p>
-      <p>{commentLink}</p>
+    <>
+    <div className='flex flex-col items-center'>
+      <p>Comment Body: {commentBody}</p>
+      <p>Comment ID: {commentID}</p>
+      <p>Comment Link: {commentLink}</p>
     </div>
+    <br />
+    </>
   )
 }
 

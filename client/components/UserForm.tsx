@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from './Button'
 import InputField from './InputField'
+import RedditComment from './RedditComment'
 
 interface UserData {
   username: string
@@ -30,6 +31,7 @@ const UserForm = () => {
         <InputField labelText='Password:' value={userData.password} type='password' name='password' placeholderText='password' onChange={handleOnChange} required/>
         <br />
         <Button buttonText='Get Comments' type='submit' onClick={handleOnClick}/>
+        <br />
       </div>
     </form>
   )
