@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import InputField from "./InputField";
 import axios from "axios";
@@ -19,6 +19,7 @@ const UserForm = () => {
     password: "",
   });
   const [comments, setComments] = useState([]);
+  const [noComment, setNoComments] = useState(true);
 
   const getAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -32,9 +33,13 @@ const UserForm = () => {
           return;
         } else {
           setComments(res.data);
+          setNoComments(false);
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setComments([]);
+        setNoComments(true);
+      });
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,12 +57,15 @@ const UserForm = () => {
           username: "",
           password: "",
         });
+        setComments([]);
+        setNoComments(true);
       })
       .catch((error) => {});
   };
 
   return (
     <form>
+      <div className="h-20"></div>
       <div className="flex flex-col items-center">
         <InputField
           labelText="Username:"
@@ -68,6 +76,7 @@ const UserForm = () => {
           onChange={handleOnChange}
           required
         />
+        <br />
         <InputField
           labelText="Password:"
           value={userData.password}
@@ -90,9 +99,13 @@ const UserForm = () => {
           />
         </div>
         <br />
-        <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          List of comments:
-        </p>
+        {noComment === true ? (
+          <p>No comments found...</p>
+        ) : (
+          <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            List of comments:
+          </p>
+        )}
         <br />
         <div>
           {comments.map((comment) => {
