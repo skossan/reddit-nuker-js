@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 import { Request, Response, Application } from "express";
 import Snoowrap from "snoowrap";
+import { Comment } from "../../types";
 
 const app: Application = express();
 app.use(express.json());
@@ -17,11 +18,11 @@ app.use(
   })
 );
 
-interface Comment {
-  id: string;
-  body: string;
-  link_permalink: string;
-}
+// interface Comment {
+//   id: string;
+//   body: string;
+//   link_permalink: string;
+// }
 
 //
 // Global Variables
