@@ -17,10 +17,16 @@ app.use(
   })
 );
 
+interface Comment {
+  id: string;
+  body: string;
+  link_permalink: string;
+}
+
 //
 // Global Variables
 //
-let comments: any = [];
+let comments: Comment[] = [];
 
 const r = new Snoowrap({
   userAgent: "Reddit-Nuker-JS-1.0",
@@ -45,12 +51,26 @@ app.post("/getComments", (req: Request, res: Response) => {
     r.getUser(username)
       .getComments()
       .then((response) => {
-        if (response.length === 0) {
-          return res.status(400).send("Could not find any comments...");
-        } else {
-          res.send(response);
-          comments = response;
+        if (!Array.isArray(response.toJSON())) {
+          return res.status(500).send("Error...");
         }
+
+        const fitlerResponse = response
+          .toJSON()
+          .map((comment: any) => {
+            if (typeof comment.id !== "string") return null;
+            if (typeof comment.body !== "string") return null;
+            if (typeof comment.link_permalink !== "string") return null;
+
+            return {
+              id: comment.id,
+              body: comment.body,
+              link_permalink: comment.link_permalink,
+            } as Comment;
+          })
+          .filter(Boolean);
+        comments = fitlerResponse;
+        res.status(200).send(comments);
       })
       .catch(() => {
         res.status(400).send("Could not find Reddit user");

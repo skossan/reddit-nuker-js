@@ -14,8 +14,8 @@ const UserForm = () => {
     username: "",
     password: "",
   });
-  const [comments, setComments] = useState([]);
-  const [noComment, setNoComments] = useState(true);
+  const [comments, setComments] = useState<string[]>([]);
+  const [noComment, setNoComments] = useState<boolean>(true);
 
   const getAllComments = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
