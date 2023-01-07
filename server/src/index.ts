@@ -42,6 +42,7 @@ app.post("/getComments", (req: Request, res: Response) => {
   const data = req.body;
   const username = data.userData.username[0];
   const password = data.userData.password[0];
+
   if (username && password) {
     r.getUser(username)
       .getComments()
